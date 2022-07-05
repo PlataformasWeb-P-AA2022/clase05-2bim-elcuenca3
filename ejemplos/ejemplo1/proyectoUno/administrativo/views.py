@@ -108,7 +108,8 @@ def editar_estudiante(request, id):
 
     return render(request, 'editarEstudiante.html', diccionario)
 
-
+@login_required(login_url='/entrando/login/')
+@permission_required('administrativo.delete_estudiante', login_url="/entrando/login/")
 def eliminar_estudiante(request, id):
     """
     """
@@ -116,10 +117,11 @@ def eliminar_estudiante(request, id):
     estudiante.delete()
     return redirect(index)
 
+@login_required(login_url='/entrando/login/')
 
 def crear_numero_telefonico(request):
     """
-    """
+    """ 
 
     if request.method=='POST':
         formulario = NumeroTelefonicoForm(request.POST)
@@ -133,6 +135,7 @@ def crear_numero_telefonico(request):
 
     return render(request, 'crearNumeroTelefonico.html', diccionario)
 
+@login_required(login_url='/entrando/login/')
 
 def editar_numero_telefonico(request, id):
     """
@@ -149,7 +152,8 @@ def editar_numero_telefonico(request, id):
     diccionario = {'formulario': formulario}
 
     return render(request, 'crearNumeroTelefonico.html', diccionario)
-
+@login_required(login_url='/entrando/login/')
+@permission_required('administrativo.can_create_numero_telefonico_sp2', login_url="/entrando/login/")
 def crear_numero_telefonico_estudiante(request, id):
     """
     """
